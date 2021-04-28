@@ -54,8 +54,7 @@ namespace SearchCustomers.WebAPI
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
-            app.UseMvc();
+            });            
         }
     }
 }
