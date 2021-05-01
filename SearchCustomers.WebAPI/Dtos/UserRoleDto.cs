@@ -1,8 +1,7 @@
-namespace SearchCustomers.Domain
+namespace SearchCustomers.WebAPI.Dtos
 {
-    public class UserRole
+    public class UserRoleDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public bool IsAdmin { get; set; }
     }

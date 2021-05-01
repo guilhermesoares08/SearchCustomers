@@ -16,7 +16,7 @@ namespace SearchCustomers.Repository.Mappings
             }
 
             builder.ToTable("Region");
-            builder.Property(p => p.Id).HasColumnName("Id").UseIdentityColumn().IsRequired().HasColumnType(SqlServerDbTypes.INT);
+            builder.Property(p => p.Id).HasColumnName("Id").UseIdentityColumn().IsRequired().HasColumnType(SqlServerDbTypes.INT).ValueGeneratedOnAdd();
             builder.Property(p => p.Name).HasColumnName("Name").IsRequired().HasColumnType(SqlServerDbTypes.VARCHAR).HasMaxLength(20);
         }
     }

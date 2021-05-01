@@ -2,6 +2,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SearchCustomers.Domain;
+using System.Linq;
 using static SearchCustomers.Repository.Utils.Constants;
 
 namespace SearchCustomers.Repository.Mappings
@@ -26,11 +27,12 @@ namespace SearchCustomers.Repository.Mappings
             builder.Property(t => t.ClassificationId).HasColumnName("ClassificationId").IsRequired(false).HasColumnType(SqlServerDbTypes.INT);
             builder.Property(t => t.UserId).HasColumnName("UserId").IsRequired(false).HasColumnType(SqlServerDbTypes.INT);
 
-            builder.HasOne(t => t.Gender).WithOne(p => p.Customer).HasForeignKey<Gender>(q => q.CustomerId);
-            builder.HasOne(t => t.City).WithMany(p => p.Customers).HasForeignKey(q => q.CityId);
-            builder.HasOne(t => t.Classification).WithOne(p => p.Customer).HasForeignKey<Classification>(q => q.CustomerId);
-            builder.HasOne(t => t.Region).WithOne(p => p.Customer).HasForeignKey<Region>(q => q.CustomerId);
-            builder.HasOne(t => t.User).WithMany(p => p.Customers).HasForeignKey(p => p.UserId);
+            builder.HasOne(t => t.Gender).WithOne().HasForeignKey<Customer>(q => q.GenderId);
+            builder.HasOne(t => t.City).WithMany().HasForeignKey(q => q.CityId);
+            builder.HasOne(t => t.Classification).WithOne().HasForeignKey<Customer>(q => q.ClassificationId);
+            
+            builder.HasOne(t => t.Region).WithOne().HasForeignKey<Customer>(q => q.RegionId);
+            builder.HasOne(t => t.User).WithMany().HasForeignKey(p => p.UserId);
         }
     }
 }

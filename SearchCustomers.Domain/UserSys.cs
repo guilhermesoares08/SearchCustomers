@@ -10,6 +10,5 @@ namespace SearchCustomers.Domain
         public string Password { get; set; }
         public int UserRoleId { get; set; }
         public UserRole UserRole { get; set; }
-        public List<Customer> Customers { get; set; }
     }
 }

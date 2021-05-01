@@ -22,7 +22,7 @@ namespace SearchCustomers.Repository.Mappings
             builder.Property(p => p.Password).HasColumnName("Password").HasColumnType(SqlServerDbTypes.VARCHAR).HasMaxLength(40).IsRequired();
             builder.Property(p => p.UserRoleId).HasColumnName("UserRoleId").HasColumnType(SqlServerDbTypes.INT).IsRequired();
 
-            builder.HasOne(p => p.UserRole).WithOne(q => q.UserSys).HasForeignKey<UserRole>(p => p.UserSysId);
+            builder.HasOne(p => p.UserRole).WithOne().HasForeignKey<UserSys>(p => p.UserRoleId);
         }
     }
 }

@@ -2,15 +2,16 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SearchCustomers.Repository.Interfaces;
-using AutoMapper;
+
 using System.Collections.Generic;
 using SearchCustomers.WebAPI.Dtos;
 using Microsoft.AspNetCore.Http;
+using AutoMapper;
 
 namespace SearchCustomers.WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CustomerController : ControllerBase
     {
         private readonly ISearchCustomersRepository _repo;
@@ -32,7 +33,7 @@ namespace SearchCustomers.WebAPI.Controllers
 
                 var resultMap = _mapper.Map<IEnumerable<CustomerDto>>(results);
 
-                return Ok(resultMap);
+                return Ok(results);
             }
             catch (System.Exception ex)
             {

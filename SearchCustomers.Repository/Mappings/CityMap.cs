@@ -17,9 +17,9 @@ namespace SearchCustomers.Repository.Mappings
 
             builder.ToTable("City");
             builder.Property(p => p.Id).HasColumnName("Id").IsRequired().ValueGeneratedOnAdd().UseIdentityColumn().HasColumnType(SqlServerDbTypes.INT);
-            builder.Property(p => p.Description).HasColumnName("Description").IsRequired().HasColumnType(SqlServerDbTypes.VARCHAR);
+            builder.Property(p => p.Name).HasColumnName("Name").IsRequired().HasColumnType(SqlServerDbTypes.VARCHAR);
             builder.Property(t => t.RegionId).HasColumnName("RegionId").IsRequired().HasColumnType(SqlServerDbTypes.INT);
-            builder.HasOne(p => p.Region).WithOne(q => q.City).HasForeignKey<Customer>(p => p.CityId);
+            builder.HasOne(p => p.Region).WithOne().HasForeignKey<City>(p => p.RegionId);
         }
     }
 }
