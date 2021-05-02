@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Domain.Repository
@@ -6,6 +7,6 @@ namespace Domain.Repository
     {
         List<Customer> GetAllCustomer();
         List<Customer> GetCustomerByUser(int userId);
-        bool ValidateUser(string email, string password);
+        List<Customer> GetCustomerByFilter(Filter filter);
     }
 }

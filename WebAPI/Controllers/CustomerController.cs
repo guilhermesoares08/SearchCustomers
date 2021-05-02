@@ -1,20 +1,17 @@
-using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-
 using System.Collections.Generic;
 using WebAPI.Dtos;
 using Microsoft.AspNetCore.Http;
 using AutoMapper;
-using Repository;
-using Domain.Repository;
 using Domain.Interfaces;
+using Domain;
 
 namespace WebAPI.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _service;
@@ -25,16 +22,32 @@ namespace WebAPI.Controllers
             _service = service;
             _mapper = mapper;
         }
-         
+
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Get()
         {
             try
             {
-                var results = _service.GetAllCustomer();
+                List<Customer> results = _service.GetAllCustomer();
+                List<CustomerDto> resultMap = _mapper.Map<List<CustomerDto>>(results);
+                return Ok(resultMap);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+            }
+        }
 
-                var resultMap = _mapper.Map<IEnumerable<CustomerDto>>(results);
+        [HttpGet("getByUser/{userId}")]
+        [AllowAnonymous]
+        public IActionResult Get(int userId)
+        {
+            try
+            {
+                List<Customer> results = _service.GetCustomerByUser(userId);
+
+                List<CustomerDto> resultMap = _mapper.Map<List<CustomerDto>>(results);
 
                 return Ok(resultMap);
             }
@@ -42,6 +55,26 @@ namespace WebAPI.Controllers
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
             }
-        }            
+        }
+
+
+        [HttpPost("Filter")]
+        [AllowAnonymous]
+        public IActionResult Post([FromBody] FilterDto filter)
+        {
+            try
+            {
+                Filter mapFilter = _mapper.Map<Filter>(filter);
+                List<Customer> results = _service.GetCustomerByFilter(mapFilter);
+                var resultMap = _mapper.Map<IEnumerable<CustomerDto>>(results);
+                return Ok(results);
+            }
+            catch (System.Exception ex)
+            {
+                string innerEx = ex.InnerException.Message;
+                string exMessage = ex.Message;
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou{exMessage + "|" + innerEx}");
+            }
+        }
     }
 }

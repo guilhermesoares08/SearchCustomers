@@ -1,9 +1,5 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-
-using System.Collections.Generic;
 using WebAPI.Dtos;
 using Microsoft.AspNetCore.Http;
 using AutoMapper;
@@ -15,10 +11,10 @@ namespace WebAPI.Controllers
     [Route("api/[controller]")]
     public class AuthenticationController : ControllerBase
     {
-        private readonly ICustomerRepository _repo;
+        private readonly IAuthenticationRepository _repo;
         private readonly IMapper _mapper;
 
-        public AuthenticationController(ICustomerRepository repo, IMapper mapper)
+        public AuthenticationController(IAuthenticationRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;

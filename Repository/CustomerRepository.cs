@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Domain;
 using Repository.DataContext;
 using Domain.Repository;
+using System;
 
 namespace Repository
 {
@@ -42,25 +43,57 @@ namespace Repository
              .Include(d => d.User).ThenInclude(p => p.UserRole)
              .Include(d => d.City).ThenInclude(p => p.Region);
 
-            query = query.AsNoTracking().Where(p => p.UserId == userId).OrderBy(p => p.Name);            
-            return  query.ToList();
-        }
+            query = query.AsNoTracking().Where(p => p.UserId == userId).OrderBy(p => p.Name);
+            return query.ToList();
+        }       
 
-        public bool ValidateUser(string email, string password)
+        public List<Customer> GetCustomerByFilter(Filter filter)
         {
-            bool isValid = false;
-            IQueryable<UserSys> query = _customerContext.UserSys;
-            query = query.AsNoTracking().Where(t => t.Email.ToUpper().Equals(email.ToUpper()) && t.Password.Equals(password));
-            if( query.First() != null)
+            string text = string.Empty;
+            IQueryable<Customer> query = _customerContext.Customers;
+            query = query
+             .Include(d => d.Gender)
+             .Include(d => d.Region)
+             .Include(d => d.Classification)
+             .Include(d => d.User).ThenInclude(p => p.UserRole)
+             .Include(d => d.City).ThenInclude(p => p.Region);
+
+            if(filter.CityId.HasValue)
             {
-                isValid = true;
+                query = query.AsNoTracking().Where(p => p.CityId.Equals(filter.CityId));
             }
-            return isValid;
-        }
+            if(filter.ClassificationId.HasValue)
+            {
+                query = query.AsNoTracking().Where(p => p.ClassificationId.Equals(filter.ClassificationId));
+            }
+            if(filter.GenderId.HasValue)
+            {
+                query = query.AsNoTracking().Where(p => p.GenderId.Equals(filter.GenderId));
+            }
+            if(filter.SellerId.HasValue)
+            {
+                query = query.AsNoTracking().Where(p => p.UserId.Equals(filter.SellerId));
+            }
+            if(filter.RegionId.HasValue)
+            {
+                query = query.AsNoTracking().Where(p => p.RegionId.Equals(filter.RegionId));
+            }
 
-        List<Customer> ICustomerRepository.GetCustomerByUser(int userId)
-        {
-            throw new System.NotImplementedException();
+            if(!string.IsNullOrEmpty(filter.Name))
+            {                
+                text = filter.Name.ToLower();
+                query = query.AsNoTracking().Where(p => p.Name.ToLower().Contains(text));
+            }
+            if(filter.StartDate.HasValue)
+            {
+                query = query.AsNoTracking().Where(p => p.LastPurchase >= filter.StartDate);
+            }
+            if(filter.EndDate.HasValue)
+            {
+                query = query.AsNoTracking().Where(p => p.LastPurchase <= filter.EndDate);
+            }
+
+            return query.ToList();
         }
     }
 }
