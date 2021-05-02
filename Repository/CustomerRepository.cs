@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 using Repository.DataContext;
-using Repository.Interfaces;
+using Domain.Repository;
 
 namespace Repository
 {
@@ -18,7 +18,7 @@ namespace Repository
         {
             _customerContext = customerContext;
         }
-        public async Task<List<Customer>> GetAllCustomerAsync()
+        public List<Customer> GetAllCustomer()
         {
             IQueryable<Customer> query = _customerContext.Customers;
             query = query
@@ -29,10 +29,10 @@ namespace Repository
              .Include(d => d.City).ThenInclude(p => p.Region);
 
             query = query.AsNoTracking().OrderBy(p => p.Name);
-            return  await query.ToListAsync();
+            return query.ToList();
         }
 
-        public async Task<List<Customer>> GetCustomerByUser(int userId)
+        public List<Customer> GetCustomerByUser(int userId)
         {
             IQueryable<Customer> query = _customerContext.Customers;
             query = query
@@ -43,7 +43,7 @@ namespace Repository
              .Include(d => d.City).ThenInclude(p => p.Region);
 
             query = query.AsNoTracking().Where(p => p.UserId == userId).OrderBy(p => p.Name);            
-            return  await query.ToListAsync();
+            return  query.ToList();
         }
 
         public bool ValidateUser(string email, string password)
@@ -56,6 +56,11 @@ namespace Repository
                 isValid = true;
             }
             return isValid;
+        }
+
+        List<Customer> ICustomerRepository.GetCustomerByUser(int userId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

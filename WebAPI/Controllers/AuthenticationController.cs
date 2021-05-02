@@ -1,12 +1,13 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Repository.Interfaces;
+
 
 using System.Collections.Generic;
 using WebAPI.Dtos;
 using Microsoft.AspNetCore.Http;
 using AutoMapper;
+using Domain.Repository;
 
 namespace WebAPI.Controllers
 {

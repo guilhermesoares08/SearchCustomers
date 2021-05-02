@@ -1,3 +1,6 @@
+using Domain.Interfaces;
+using Domain.Repository;
+using Domain.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -7,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Repository;
 using Repository.DataContext;
-using Repository.Interfaces;
 
 namespace WebAPI
 {
@@ -25,6 +27,7 @@ namespace WebAPI
         {
             services.AddDbContext<CustomerDataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DbConnectionString")));
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerService, CustomerService>();
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen(c =>
