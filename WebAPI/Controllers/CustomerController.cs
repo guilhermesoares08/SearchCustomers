@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpPost("Filter")]
+        [HttpPost("filter")]
         [AllowAnonymous]
         public IActionResult Post([FromBody] FilterDto filter)
         {

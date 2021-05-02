@@ -19,16 +19,16 @@
       <th>Seller</th>
     </tr>
   </thead>
-  <tbody>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+  <tbody *ngIf="filteredCustomers && filteredCustomers.length">
+    <tr *ngFor="let cust of filteredCustomers">
+      <td>{{cust.classification.name}}</td>
+      <td>{{cust.name}}</td>
+      <td>{{cust.phone}}</td>
+      <td>{{cust.gender.name}}</td>
+      <td>{{cust.city.name}}</td>
+      <td>{{cust.region.name}}</td>
+      <td>{{cust.lastPurchase}}</td>
+      <td>{{cust.user.login}}</td>
     </tr>
   </tbody>
 </table>
