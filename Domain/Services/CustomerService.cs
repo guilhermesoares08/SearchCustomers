@@ -1,8 +1,5 @@
 
-
-using System;
 using System.Collections.Generic;
-using AutoMapper;
 using Domain.Interfaces;
 using Domain.Repository;
 
@@ -31,6 +28,31 @@ namespace Domain.Services
         {
             return _repo.GetCustomerByFilter(filter);
 
+        }
+
+        public List<City> GetAllCities()
+        {
+            return _repo.GetAllCities();
+        }
+
+        public List<Gender> GetAllGenders()
+        {
+            return _repo.GetAllGenders();
+        }
+
+        public List<Classification> GetAllClassifications()
+        {
+            return _repo.GetAllClassifications();
+        }
+
+        public List<UserSys> GetAllSellers()
+        {
+            return _repo.GetAllUsersSys();
+        }
+
+        public List<Region> GetAllRegions()
+        {
+            return _repo.GetAllRegions();
         }
     }
 }

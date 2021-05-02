@@ -76,5 +76,85 @@ namespace WebAPI.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou{exMessage + "|" + innerEx}");
             }
         }
+
+        [HttpGet("cities")]
+        [AllowAnonymous]
+        public IActionResult GetAllCities()
+        {
+            try
+            {
+                List<City> results = _service.GetAllCities();
+                List<CityDto> resultMap = _mapper.Map<List<CityDto>>(results);
+                return Ok(resultMap);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+            }
+        }
+
+        [HttpGet("genders")]
+        [AllowAnonymous]
+        public IActionResult GetAllGenders()
+        {
+            try
+            {
+                List<Gender> results = _service.GetAllGenders();
+                List<GenderDto> resultMap = _mapper.Map<List<GenderDto>>(results);
+                return Ok(resultMap);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+            }
+        }
+
+        [HttpGet("classifications")]
+        [AllowAnonymous]
+        public IActionResult GetAllClassifications()
+        {
+            try
+            {
+                List<Classification> results = _service.GetAllClassifications();
+                List<ClassificationDto> resultMap = _mapper.Map<List<ClassificationDto>>(results);
+                return Ok(resultMap);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+            }
+        }
+
+        [HttpGet("sellers")]
+        [AllowAnonymous]
+        public IActionResult GetAllSellers()
+        {
+            try
+            {
+                List<UserSys> results = _service.GetAllSellers();
+                List<UserSysDto> resultMap = _mapper.Map<List<UserSysDto>>(results);
+                return Ok(resultMap);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+            }
+        }
+
+        [HttpGet("regions")]
+        [AllowAnonymous]
+        public IActionResult GetAllRegions()
+        {
+            try
+            {
+                List<Region> results = _service.GetAllRegions();
+                List<RegionDto> resultMap = _mapper.Map<List<RegionDto>>(results);
+                return Ok(resultMap);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+            }
+        }
     }
 }

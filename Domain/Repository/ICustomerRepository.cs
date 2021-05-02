@@ -8,5 +8,11 @@ namespace Domain.Repository
         List<Customer> GetAllCustomer();
         List<Customer> GetCustomerByUser(int userId);
         List<Customer> GetCustomerByFilter(Filter filter);
+        List<City> GetAllCities();
+        List<Gender> GetAllGenders();
+        List<Classification> GetAllClassifications();
+        List<UserSys> GetAllUsersSys();
+        List<Region> GetAllRegions();
+
     }
 }

@@ -45,7 +45,7 @@ namespace Repository
 
             query = query.AsNoTracking().Where(p => p.UserId == userId).OrderBy(p => p.Name);
             return query.ToList();
-        }       
+        }
 
         public List<Customer> GetCustomerByFilter(Filter filter)
         {
@@ -58,41 +58,82 @@ namespace Repository
              .Include(d => d.User).ThenInclude(p => p.UserRole)
              .Include(d => d.City).ThenInclude(p => p.Region);
 
-            if(filter.CityId.HasValue)
+            if (filter.CityId.HasValue)
             {
                 query = query.AsNoTracking().Where(p => p.CityId.Equals(filter.CityId));
             }
-            if(filter.ClassificationId.HasValue)
+            if (filter.ClassificationId.HasValue)
             {
                 query = query.AsNoTracking().Where(p => p.ClassificationId.Equals(filter.ClassificationId));
             }
-            if(filter.GenderId.HasValue)
+            if (filter.GenderId.HasValue)
             {
                 query = query.AsNoTracking().Where(p => p.GenderId.Equals(filter.GenderId));
             }
-            if(filter.SellerId.HasValue)
+            if (filter.SellerId.HasValue)
             {
                 query = query.AsNoTracking().Where(p => p.UserId.Equals(filter.SellerId));
             }
-            if(filter.RegionId.HasValue)
+            if (filter.RegionId.HasValue)
             {
                 query = query.AsNoTracking().Where(p => p.RegionId.Equals(filter.RegionId));
             }
 
-            if(!string.IsNullOrEmpty(filter.Name))
-            {                
+            if (!string.IsNullOrEmpty(filter.Name))
+            {
                 text = filter.Name.ToLower();
                 query = query.AsNoTracking().Where(p => p.Name.ToLower().Contains(text));
             }
-            if(filter.StartDate.HasValue)
+            if (filter.StartDate.HasValue)
             {
                 query = query.AsNoTracking().Where(p => p.LastPurchase >= filter.StartDate);
             }
-            if(filter.EndDate.HasValue)
+            if (filter.EndDate.HasValue)
             {
                 query = query.AsNoTracking().Where(p => p.LastPurchase <= filter.EndDate);
             }
 
+            return query.ToList();
+        }
+
+        public List<City> GetAllCities()
+        {
+            IQueryable<City> query = _customerContext.Cities;
+            query = query
+             .Include(d => d.Region);
+
+            query = query.AsNoTracking().OrderBy(p => p.Name);
+            return query.ToList();
+        }
+
+        public List<Gender> GetAllGenders()
+        {
+            IQueryable<Gender> query = _customerContext.Genders;
+
+            query = query.AsNoTracking().OrderBy(p => p.Name);
+            return query.ToList();
+        }
+
+        public List<Classification> GetAllClassifications()
+        {
+            IQueryable<Classification> query = _customerContext.Classifications;
+
+            query = query.AsNoTracking().OrderBy(p => p.Name);
+            return query.ToList();
+        }
+
+        public List<UserSys> GetAllUsersSys()
+        {
+            IQueryable<UserSys> query = _customerContext.UserSys;
+            query = query.Include(o => o.UserRole);
+            query = query.AsNoTracking().OrderBy(p => p.Login);
+            return query.ToList();
+        }
+
+        public List<Region> GetAllRegions()
+        {
+            IQueryable<Region> query = _customerContext.Regions;
+            query = query.AsNoTracking().OrderBy(p => p.Name);
             return query.ToList();
         }
     }
