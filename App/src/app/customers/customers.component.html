@@ -1,40 +1,40 @@
-<form>
+<form [formGroup]="filterForm" >
   <div class="row">
-    <div class="form-group col-md-4">
-      <label>Name: </label> <input type="text" class="form-control mr-2" />
+    <div class="form-group ccleol-md-4">
+      <label>Name: </label> <input formControlName="searchText" type="text" class="form-control mr-2" />
     </div>
     <div class="form-group col-md-4">
       <label>Gender:</label>
-      <select>
-        <option role="menuitem" *ngFor="let t of genders">
+      <select formControlName="genderId">
+        <option role="menuitem" *ngFor="let t of genders" [ngValue]="t.id">
           <a class="dropdown-item">{{ t.name }}</a>
         </option>
       </select>
     </div>
     <div class="form-group col-md-4">
-      <button class="btn btn-outline-success">Search</button>
+      <button (click)="searchCustomer()" type="submit" class="btn btn-outline-success">Search</button>
     </div>
   </div>
 
   <div class="row">
     <div class="form-group col-md-4">
       <label>City:</label>
-      <select>
-        <option role="menuitem" *ngFor="let t of cities">
+      <select id="cityId" formControlName="cityId" >
+        <option   role="menuitem" *ngFor="let t of cities" [ngValue]="t.id">
           <a class="dropdown-item">{{ t.name }}</a>
         </option>
       </select>
     </div>
       <div class="form-group col-md-4">
         <label>Region:</label>
-        <select>
-          <option role="menuitem" *ngFor="let t of regions">
+        <select formControlName="regionId">
+          <option  role="menuitem" *ngFor="let t of regions" [ngValue]="t.id">
             <a class="dropdown-item">{{ t.name }}</a>
           </option>
         </select>
       </div>    
       <div class="form-group col-md-4">
-        <button class="btn btn-outline-success">Clear Fields</button>
+        <button class="btn btn-outline-success" (click)="filterForm.reset()">Clear Fields</button>
       </div>
   </div>
 
@@ -42,13 +42,13 @@
     <div class="form-group col-md-6">
       <label>Last Purchase:</label>
       <div class="col-xs-12 col-12 col-md-4 form-group">
-        <input type="text" placeholder="" class="form-control" bsDatepicker>
+        <input formControlName="stDate" type="text" placeholder="" class="form-control" bsDatepicker>
       </div>
     </div>
       <div class="form-group col-md-6">
         <label>Until:</label>
         <div class="col-xs-12 col-12 col-md-4 form-group">
-          <input type="text" placeholder="" class="form-control" bsDatepicker>
+          <input formControlName="edDate" type="text" placeholder="" class="form-control"  bsDatepicker>
         </div>
       </div>    
   </div>
@@ -56,22 +56,21 @@
   <div class="row">
     <div class="form-group col-md-6">
       <label>Classification:</label>
-      <select>
-        <option role="menuitem" *ngFor="let t of classifications">
+      <select formControlName="classificationId">
+        <option role="menuitem" *ngFor="let t of classifications" [ngValue]="t.id">
           <a class="dropdown-item">{{ t.name }}</a>
         </option>
       </select>
     </div>
       <div class="form-group col-md-6">
         <label>Seller:</label>
-        <select>
-          <option role="menuitem" *ngFor="let t of sellers">
+        <select formControlName="sellerId">
+          <option role="menuitem" *ngFor="let t of sellers" [ngValue]="t.id">
             <a class="dropdown-item">{{ t.login }}</a>
           </option>
         </select>
       </div>    
-  </div>
-  
+  </div>  
 </form>
 
 <table class="table table-striped">

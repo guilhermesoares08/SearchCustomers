@@ -92,7 +92,7 @@ namespace Repository
             {
                 query = query.AsNoTracking().Where(p => p.LastPurchase <= filter.EndDate);
             }
-
+            query = query.AsNoTracking().OrderBy(p => p.Name);
             return query.ToList();
         }
 
