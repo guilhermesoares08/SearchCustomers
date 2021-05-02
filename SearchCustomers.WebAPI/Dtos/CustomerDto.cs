@@ -9,5 +9,9 @@ namespace SearchCustomers.WebAPI.Dtos
         public string Name { get; set; }
         public string Phone { get; set; }
         public CityDto City { get; set; }
+        public RegionDto Region { get; set; }
+        public int UserId { get; set; }
+        public GenderDto Gender { get; set; }
+        public ClassificationDto Classification { get; set; }
     }
 }

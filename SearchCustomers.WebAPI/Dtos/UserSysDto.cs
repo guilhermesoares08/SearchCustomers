@@ -4,7 +4,6 @@ namespace SearchCustomers.WebAPI.Dtos
     {
         public string Login { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
-        public UserSysDto User { get; set; }
+        public string Password { get; set; }        
     }
 }

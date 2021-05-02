@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AssemblyName>SearchCustomers.Domain</AssemblyName>
+    <RootNamespace>SearchCustomers.Domain</RootNamespace>
   </PropertyGroup>
 
 </Project>

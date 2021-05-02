@@ -33,12 +33,14 @@ namespace SearchCustomers.WebAPI.Controllers
 
                 var resultMap = _mapper.Map<IEnumerable<CustomerDto>>(results);
 
-                return Ok(results);
+                return Ok(resultMap);
             }
             catch (System.Exception ex)
             {
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
             }
-        }
+        }       
+
+        
     }
 }

@@ -6,5 +6,7 @@ namespace SearchCustomers.Repository.Interfaces
     public interface ISearchCustomersRepository
     {
         Task<List<Customer>> GetAllCustomerAsync();
+        Task<List<Customer>> GetCustomerByUser(int userId);
+        bool ValidateUser(string email, string password);
     }
 }

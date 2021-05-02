@@ -31,5 +31,31 @@ namespace SearchCustomers.Repository
             query = query.AsNoTracking().OrderBy(p => p.Name);
             return  await query.ToListAsync();
         }
+
+        public async Task<List<Customer>> GetCustomerByUser(int userId)
+        {
+            IQueryable<Customer> query = _searchCustomersContext.Customers;
+            query = query
+             .Include(d => d.Gender)
+             .Include(d => d.Region)
+             .Include(d => d.Classification)
+             .Include(d => d.User).ThenInclude(p => p.UserRole)
+             .Include(d => d.City).ThenInclude(p => p.Region);
+
+            query = query.AsNoTracking().Where(p => p.UserId == userId).OrderBy(p => p.Name);            
+            return  await query.ToListAsync();
+        }
+
+        public bool ValidateUser(string email, string password)
+        {
+            bool isValid = false;
+            IQueryable<UserSys> query = _searchCustomersContext.UserSys;
+            query = query.AsNoTracking().Where(t => t.Email.ToUpper().Equals(email.ToUpper()) && t.Password.Equals(password));
+            if( query.First() != null)
+            {
+                isValid = true;
+            }
+            return isValid;
+        }
     }
 }
