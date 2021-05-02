@@ -1,9 +1,51 @@
-<form class="form-inline">
-  <div class="form-group mb-2">
-    Name: <input type="text" class="form-control mr-2" />    
-    <button class="btn btn-outline-success">Search</button>
+<form>
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label>Name: </label> <input type="text" class="form-control mr-2" />
+    </div>
+    <div class="form-group col-md-6">
+      <label>Gender:</label>
+      <select>
+        <option role="menuitem" *ngFor="let t of genders">
+          <a class="dropdown-item">{{ t.name }}</a>
+        </option>
+      </select>
+    </div>
   </div>
-  
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label>City:</label>
+      <select>
+        <option role="menuitem" *ngFor="let t of cities">
+          <a class="dropdown-item">{{ t.name }}</a>
+        </option>
+      </select>
+    </div>
+      <div class="form-group col-md-6">
+        <label>Region:</label>
+        <select>
+          <option role="menuitem" *ngFor="let t of regions">
+            <a class="dropdown-item">{{ t.name }}</a>
+          </option>
+        </select>
+      </div>    
+  </div>
+
+  <div class="row">
+    <div class="form-group col-md-6">
+      <label>Last Purchase:</label>
+      <input placeholder="" type="text" class="form-control " bsDatepicker>                                  
+    </div>
+      <div class="form-group col-md-6">
+        <label>Until:</label>
+        <input placeholder="" type="text" class="form-control " bsDatepicker>                                  
+      </div>    
+  </div>
+
+ 
+
+  <button class="btn btn-outline-success">Search</button>
 </form>
 
 <table class="table table-striped">
@@ -11,7 +53,7 @@
     <tr>
       <th>Classification</th>
       <th>Name</th>
-      <th>Phone</th>  
+      <th>Phone</th>
       <th>Gender</th>
       <th>City</th>
       <th>Region</th>
@@ -21,14 +63,14 @@
   </thead>
   <tbody *ngIf="filteredCustomers && filteredCustomers.length">
     <tr *ngFor="let cust of filteredCustomers">
-      <td>{{cust.classification.name}}</td>
-      <td>{{cust.name}}</td>
-      <td>{{cust.phone}}</td>
-      <td>{{cust.gender.name}}</td>
-      <td>{{cust.city.name}}</td>
-      <td>{{cust.region.name}}</td>
-      <td>{{cust.lastPurchase}}</td>
-      <td>{{cust.user.login}}</td>
+      <td>{{ cust.classification.name }}</td>
+      <td>{{ cust.name }}</td>
+      <td>{{ cust.phone }}</td>
+      <td>{{ cust.gender.name }}</td>
+      <td>{{ cust.city.name }}</td>
+      <td>{{ cust.region.name }}</td>
+      <td>{{ cust.lastPurchase }}</td>
+      <td>{{ cust.user.login }}</td>
     </tr>
   </tbody>
 </table>
