@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { City } from '../_models/City';
+import { Classification } from '../_models/Classification';
 import { Customer } from '../_models/Customer';
 import { Filter } from '../_models/Filter';
 import { Gender } from '../_models/Gender';
@@ -44,6 +45,10 @@ export class CustomerService {
 
   getAllGenders(): Observable<Gender[]> {
     return this.http.get<Gender[]>(this.baseUrl + `/genders`);
+  }
+
+  getAllClassifications(): Observable<Classification[]> {
+    return this.http.get<Classification[]>(this.baseUrl + `/classifications`);
   }
 
 }
