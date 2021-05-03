@@ -1,25 +1,24 @@
 <form [formGroup]="filterForm" >
   <div class="row">
-    <div class="form-group ccleol-md-4">
-      <label>Name: </label> <input formControlName="searchText" type="text" class="form-control mr-2" />
+    <div class="form-group col-md-4">
+      <label>Name: </label> 
+      <input class="form-control" formControlName="searchText" type="text" />
     </div>
     <div class="form-group col-md-4">
       <label>Gender:</label>
-      <select formControlName="genderId">
+      <select class="form-control" formControlName="genderId">
         <option role="menuitem" *ngFor="let t of genders" [ngValue]="t.id">
           <a class="dropdown-item">{{ t.name }}</a>
         </option>
       </select>
     </div>
-    <div class="form-group col-md-4">
-      <button (click)="searchCustomer()" type="submit" class="btn btn-outline-success">Search</button>
-    </div>
   </div>
+    
 
   <div class="row">
     <div class="form-group col-md-4">
       <label>City:</label>
-      <select id="cityId" formControlName="cityId" >
+      <select class="form-control" id="cityId" formControlName="cityId" >
         <option   role="menuitem" *ngFor="let t of cities" [ngValue]="t.id">
           <a class="dropdown-item">{{ t.name }}</a>
         </option>
@@ -27,50 +26,51 @@
     </div>
       <div class="form-group col-md-4">
         <label>Region:</label>
-        <select formControlName="regionId">
+        <select class="form-control" formControlName="regionId">
           <option  role="menuitem" *ngFor="let t of regions" [ngValue]="t.id">
             <a class="dropdown-item">{{ t.name }}</a>
           </option>
         </select>
-      </div>    
-      <div class="form-group col-md-4">
-        <button class="btn btn-outline-success" (click)="filterForm.reset()">Clear Fields</button>
       </div>
-  </div>
+    </div>          
 
-  <div class="row">
-    <div class="form-group col-md-6">
-      <label>Last Purchase:</label>
-      <div class="col-xs-12 col-12 col-md-4 form-group">
-        <input formControlName="stDate" type="text" placeholder="" class="form-control" bsDatepicker>
-      </div>
+  
+    <div class="button-group col-xs-8 col-sm-8 col-md-2" style="float:right;">
+      <button (click)="searchCustomer()" type="submit" class="btn btn-success btn-block">Search</button>
+      <button class="btn btn-outline-success btn-block" (click)="filterForm.reset()">Clear Fields</button>
     </div>
-      <div class="form-group col-md-6">
-        <label>Until:</label>
-        <div class="col-xs-12 col-12 col-md-4 form-group">
-          <input formControlName="edDate" type="text" placeholder="" class="form-control"  bsDatepicker>
-        </div>
+  
+  <div class="row">
+    <div class="form-group col-md-4">
+      <label>Last Purchase:</label>      
+      <input formControlName="stDate" type="text" placeholder="" class="form-control" bsDatepicker>     
+    </div>
+    <div class="form-group col-md-4">
+      <label>Until:</label>        
+      <input formControlName="edDate" type="text" placeholder="" class="form-control"  bsDatepicker>        
       </div>    
   </div>
-
+ 
   <div class="row">
-    <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
       <label>Classification:</label>
-      <select formControlName="classificationId">
+      <select class="form-control" formControlName="classificationId">
         <option role="menuitem" *ngFor="let t of classifications" [ngValue]="t.id">
           <a class="dropdown-item">{{ t.name }}</a>
         </option>
-      </select>
+      </select>    
     </div>
-      <div class="form-group col-md-6">
+    <div class="form-group col-md-4">
         <label>Seller:</label>
-        <select formControlName="sellerId">
+        <select class="form-control"  formControlName="sellerId">
           <option role="menuitem" *ngFor="let t of sellers" [ngValue]="t.id">
             <a class="dropdown-item">{{ t.login }}</a>
           </option>
         </select>
       </div>    
-  </div>  
+  </div> 
+  
+  
 </form>
 
 <table class="table table-striped">
@@ -99,3 +99,4 @@
     </tr>
   </tbody>
 </table>
+  
