@@ -29,7 +29,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                List<Customer> results = _service.GetAllCustomer();
+                List<Customer> results = _service.GetAllCustomers();
                 List<CustomerDto> resultMap = _mapper.Map<List<CustomerDto>>(results);
                 return Ok(resultMap);
             }

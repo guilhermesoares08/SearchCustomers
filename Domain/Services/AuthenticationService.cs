@@ -1,4 +1,3 @@
-using AutoMapper;
 using Domain.Interfaces;
 using Domain.Repository;
 
@@ -14,8 +13,14 @@ namespace Domain.Services
         }     
         
         public UserSys ValidateUser(string email, string password)
-        {
+        {            
             return _repo.ValidateUser(email, password);
         }
+
+        public UserSys GetUserByLogin(string login)
+        {
+            return _repo.GetUserByLogin(login);
+        }
+
     }
 }

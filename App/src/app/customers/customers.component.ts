@@ -10,6 +10,7 @@ import { UserSys } from '../_models/UserSys';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Filter } from '../_models/Filter';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { AuthenticationService } from 'src/app/services/Authentication.service';
 
 @Component({
   selector: 'app-customers',
@@ -18,6 +19,7 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class CustomersComponent implements OnInit {
 
+  currentUser: UserSys;
   customers: Customer[];
   cities: City[];
   classifications: Classification[];
@@ -30,7 +32,7 @@ export class CustomersComponent implements OnInit {
   filteredCustomers: Customer[];
   filter: Filter;
   datepickerConfig: Partial<BsDatepickerConfig>;
-  constructor(private http: HttpClient, private customerService: CustomerService, private formBuilder: FormBuilder) {
+  constructor(private http: HttpClient, private customerService: CustomerService, private formBuilder: FormBuilder, private authService: AuthenticationService) {
     this.datepickerConfig = Object.assign({}, { dateInputFormat: 'DD/MM/YYYY' });
 
   }
@@ -56,13 +58,22 @@ export class CustomersComponent implements OnInit {
   }
 
   getAllCustomers() {
-    this.customerService.getAllCustomers().subscribe(
-      // tslint:disable-next-line: variable-name
-      (_customers: Customer[]) => {
-        this.customers = _customers;
-        this.filteredCustomers = this.customers;
-      }
-    );
+    if (this.authService.loggedIn()) {
+      this.authService.getUserByLogin(sessionStorage.getItem('login')).subscribe(
+        (_user: UserSys) => {
+          this.currentUser = _user;
+          if (this.currentUser != null) {
+            this.customerService.getCustomerByUser(this.currentUser.id).subscribe(
+              (_customers: Customer[]) => {
+                this.customers = _customers;
+                this.filteredCustomers = this.customers;
+              }
+            );
+          }
+        }
+      );
+    }
+
   }
 
   getAllCities() {
@@ -106,27 +117,22 @@ export class CustomersComponent implements OnInit {
   }
 
   searchCustomer() {
-    this.filter = new Filter();
-    this.filter.cityId = this.filterForm.controls['cityId'].value;
-    this.filter.classificationId = this.filterForm.controls['classificationId'].value;
-    this.filter.genderId = this.filterForm.controls['genderId'].value;
-    this.filter.name = this.filterForm.controls['searchText'].value;
-    this.filter.regionId = this.filterForm.controls['regionId'].value;
-    this.filter.sellerId = this.filterForm.controls['sellerId'].value;
-    this.filter.startDate = this.filterForm.controls['stDate'].value;
-    this.filter.endDate = this.filterForm.controls['edDate'].value;
-
-    this.customerService.getCustomerByFilter(this.filter).subscribe(
-      (responseCustomers: Customer[]) => {
-        this.filteredCustomers = responseCustomers;
-      }
-    );
+    if (this.authService.loggedIn()) {
+      this.filter = new Filter();
+      this.filter.cityId = this.filterForm.controls['cityId'].value;
+      this.filter.classificationId = this.filterForm.controls['classificationId'].value;
+      this.filter.genderId = this.filterForm.controls['genderId'].value;
+      this.filter.name = this.filterForm.controls['searchText'].value;
+      this.filter.regionId = this.filterForm.controls['regionId'].value;
+      this.filter.sellerId = this.filterForm.controls['sellerId'].value;
+      this.filter.startDate = this.filterForm.controls['stDate'].value;
+      this.filter.endDate = this.filterForm.controls['edDate'].value;
+      this.filter.userId = this.currentUser.id;
+      this.customerService.getCustomerByFilter(this.filter).subscribe(
+        (responseCustomers: Customer[]) => {
+          this.filteredCustomers = responseCustomers;
+        }
+      );
+    }
   }
-
-  // logout() {
-  //   localStorage.removeItem('token');
-  //   this.toastr.show('Log Out');
-  //   this.router.navigate(['/user/login']);
-  // }
-
 }

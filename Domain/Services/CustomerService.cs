@@ -14,20 +14,24 @@ namespace Domain.Services
             _repo = repo;
         }
 
-        public List<Customer> GetAllCustomer()
+        public List<Customer> GetAllCustomers()
         {
-            return _repo.GetAllCustomer();
+            return _repo.GetAllCustomers();
         }
 
         public List<Customer> GetCustomerByUser(int userId)
         {
+            var currentUser = this._repo.GetUserRoleById(userId);
+            if(currentUser != null && currentUser.IsAdmin)
+            {
+                return GetAllCustomers();
+            }
             return _repo.GetCustomerByUser(userId);
         }
 
         public List<Customer> GetCustomerByFilter(Filter filter)
-        {
+        {            
             return _repo.GetCustomerByFilter(filter);
-
         }
 
         public List<City> GetAllCities()
@@ -53,6 +57,11 @@ namespace Domain.Services
         public List<Region> GetAllRegions()
         {
             return _repo.GetAllRegions();
+        }
+
+        public UserRole GetUserRoleById(int id)
+        {
+            return _repo.GetUserRoleById(id);
         }
     }
 }

@@ -13,13 +13,13 @@ namespace Repository
 {
     public class CustomerRepository : ICustomerRepository
     {
-        private readonly CustomerDataContext _customerContext;
+        private readonly CustomerDataContext _customerContext;    
 
         public CustomerRepository(CustomerDataContext customerContext)
         {
-            _customerContext = customerContext;
+            _customerContext = customerContext;            
         }
-        public List<Customer> GetAllCustomer()
+        public List<Customer> GetAllCustomers()
         {
             IQueryable<Customer> query = _customerContext.Customers;
             query = query
@@ -92,6 +92,10 @@ namespace Repository
             {
                 query = query.AsNoTracking().Where(p => p.LastPurchase <= filter.EndDate);
             }
+            if (filter.UserId.HasValue && GetUserSysById(filter.UserId.Value) != null && !GetUserSysById(filter.UserId.Value).UserRole.IsAdmin)
+            {
+                query = query.AsNoTracking().Where(p => p.UserId == filter.UserId);
+            }
             query = query.AsNoTracking().OrderBy(p => p.Name);
             return query.ToList();
         }
@@ -135,6 +139,20 @@ namespace Repository
             IQueryable<Region> query = _customerContext.Regions;
             query = query.AsNoTracking().OrderBy(p => p.Name);
             return query.ToList();
+        }
+        public UserRole GetUserRoleById(int id)
+        {
+            IQueryable<UserRole> query = _customerContext.UserRoles;
+            query = query.AsNoTracking().Where(c => c.Id == id);
+            return query.FirstOrDefault();
+        }
+
+        private UserSys GetUserSysById(int id)
+        {
+            IQueryable<UserSys> query = _customerContext.UserSys;
+            query = query.Include(q => q.UserRole);
+            query = query.AsNoTracking().Where(c => c.Id == id);            
+            return query.FirstOrDefault();
         }
     }
 }

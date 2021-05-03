@@ -7,4 +7,5 @@ export class Filter{
     classificationId: number; 
     sellerId: number; 
     name: string;
+    userId: number;
 }
