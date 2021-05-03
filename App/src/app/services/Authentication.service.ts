@@ -16,7 +16,7 @@ export class AuthenticationService {
   }
 
   loggedIn() {
-    var user = sessionStorage.getItem('login');
+    var user = localStorage.getItem('login');
     return user != null;
   } 
 

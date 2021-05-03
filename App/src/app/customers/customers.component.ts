@@ -12,6 +12,8 @@ import { Filter } from '../_models/Filter';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { AuthenticationService } from 'src/app/services/Authentication.service';
 import { toArray } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -39,7 +41,7 @@ export class CustomersComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient, private customerService: CustomerService, private formBuilder: FormBuilder, private authService: AuthenticationService) {
+  constructor(private http: HttpClient, private customerService: CustomerService, private formBuilder: FormBuilder, private authService: AuthenticationService, private toastr: ToastrService, public router: Router) {
 
     this.datepickerConfig = Object.assign({}, { dateInputFormat: 'DD/MM/YYYY' });
 
@@ -72,7 +74,7 @@ export class CustomersComponent implements OnInit {
 
   getAllCustomers() {
     if (this.authService.loggedIn()) {
-      this.authService.getUserByLogin(sessionStorage.getItem('login')).subscribe(
+      this.authService.getUserByLogin(localStorage.getItem('login')).subscribe(
         (_user: UserSys) => {
           this.currentUser = _user;
           if (this.currentUser != null) {
@@ -160,7 +162,7 @@ export class CustomersComponent implements OnInit {
   }
 
   getCurrentUser() {
-    this.authService.getUserByLogin(sessionStorage.getItem('login')).subscribe(
+    this.authService.getUserByLogin(localStorage.getItem('login')).subscribe(
       (_user: UserSys) => {
         this.currentUser = _user;
       }
@@ -168,18 +170,24 @@ export class CustomersComponent implements OnInit {
   }
 
   currentUserIsAdmin() {
-    this.authService.getUserByLogin(sessionStorage.getItem('login')).subscribe(
+    this.authService.getUserByLogin(localStorage.getItem('login')).subscribe(
       (_user: UserSys) => {
         this.currentUser = _user;
-        this.isUserAdmin =  _user.userRole.isAdmin;
+        this.isUserAdmin = _user.userRole.isAdmin;
         return _user.userRole.isAdmin;
       }
     );
-    return false;   
+    return false;
   }
 
-  clearFormFields(){
+  clearFormFields() {
     this.filteredRegions = this.regions;
-    this.filterForm.reset();    
+    this.filterForm.reset();
+  }
+
+  logout() {
+    localStorage.removeItem('login');
+    this.toastr.show('Log Out');
+    this.router.navigate(['/login']);
   }
 }

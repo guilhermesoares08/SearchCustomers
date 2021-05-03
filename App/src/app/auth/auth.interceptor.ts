@@ -12,7 +12,7 @@ export class AuthInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (localStorage.getItem('login') !== null) {
             const cloneReq = req.clone({
-                headers: req.headers.set('Authorization', `${sessionStorage.getItem('login')}`)
+                headers: req.headers.set('Authorization', `${localStorage.getItem('login')}`)
             });
             return next.handle(cloneReq).pipe(
                 tap(

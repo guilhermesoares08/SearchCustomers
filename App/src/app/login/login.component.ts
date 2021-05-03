@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
      }
 
   ngOnInit() {   
-    this.validUser = false;
-    if (sessionStorage.getItem('login') != null) {
+    this.validUser = true;
+    if (localStorage.getItem('login') != null) {
       this.router.navigate(['']);
     }
   }
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         (_return: any) => {          
           this.validUser = true;
-          sessionStorage.setItem('login', _return.user.login);
+          localStorage.setItem('login', _return.user.login);
           this.router.navigate(['']);
           this.toastr.success('Login Succefull');
         },

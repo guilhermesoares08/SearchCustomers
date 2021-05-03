@@ -2,10 +2,16 @@
     width: 100%;
     max-width: 330px;
     padding: 15px;
-    margin: 15% auto;
+    margin: 15% auto;    
 }
 
-form.signin .ng-invalid
-{
-    border-color:red;
+#formSign{
+    border-style: solid;
+    width: 600px;
+    height: 200px;
+    box-sizing: border-box;
+}
+
+.input-error {
+    border: red 1px solid;
 }
