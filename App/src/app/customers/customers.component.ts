@@ -27,6 +27,7 @@ export class CustomersComponent implements OnInit {
   classifications: Classification[];
   genders: Gender[];
   regions: Region[];
+  filteredRegions: Region[];
   sellers: UserSys[];
   filterForm: FormGroup;
   startDate: Date;
@@ -35,6 +36,8 @@ export class CustomersComponent implements OnInit {
   filter: Filter;
   datepickerConfig: Partial<BsDatepickerConfig>;
   filteredCity: City;
+
+
 
   constructor(private http: HttpClient, private customerService: CustomerService, private formBuilder: FormBuilder, private authService: AuthenticationService) {
 
@@ -106,6 +109,7 @@ export class CustomersComponent implements OnInit {
     this.customerService.getAllRegions().subscribe(
       (_regions: Region[]) => {
         this.regions = _regions;
+        this.filteredRegions = _regions;
       }
     );
   }
@@ -149,8 +153,8 @@ export class CustomersComponent implements OnInit {
     this.customerService.getCityById(this.filterForm.value.cityId).subscribe(
       (_city: City) => {
         this.filteredCity = _city;
-        this.regions = [];
-        this.regions.push(_city.region);
+        this.filteredRegions = [];
+        this.filteredRegions.push(_city.region);
       }
     );
   }
@@ -167,9 +171,15 @@ export class CustomersComponent implements OnInit {
     this.authService.getUserByLogin(sessionStorage.getItem('login')).subscribe(
       (_user: UserSys) => {
         this.currentUser = _user;
+        this.isUserAdmin =  _user.userRole.isAdmin;
         return _user.userRole.isAdmin;
       }
     );
-    return false;
+    return false;   
+  }
+
+  clearFormFields(){
+    this.filteredRegions = this.regions;
+    this.filterForm.reset();    
   }
 }

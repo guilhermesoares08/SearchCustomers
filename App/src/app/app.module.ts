@@ -14,12 +14,14 @@ import { ToastrModule } from 'ngx-toastr';
 import {AuthGuard} from './auth/auth.guard'
 import { RouterModule } from '@angular/router';
 import { AuthenticationService } from './services/Authentication.service';
+import { DateTimeFormatPipePipe } from './_helpers/DateTimeFormatPipe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomersComponent,
-    LoginComponent
+    LoginComponent,
+    DateTimeFormatPipePipe
   ],
   imports: [
     BrowserModule,
