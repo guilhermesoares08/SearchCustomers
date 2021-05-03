@@ -1,5 +1,7 @@
 # SearchCustomers
 ## Sistema de busca e visualização de clientes
+## Se o projeto não rodar devido ao package do Angular CLI,então rodar o comando 'npm update'
+
 
 # versions APP
 ### Angular CLI: 9.1.15
