@@ -36,8 +36,8 @@
 
   
     <div class="button-group col-xs-8 col-sm-8 col-md-2" style="float:right;">
-      <button (click)="searchCustomer()" type="submit" class="btn btn-success btn-block">Search</button>
-      <button class="btn btn-outline-success btn-block" (click)="clearFormFields()">Clear Fields</button>      
+      <button (click)="searchCustomer()" type="submit" class="btn btn-primary btn-block">Search</button>
+      <button class="btn btn-outline-primary btn-block" (click)="clearFormFields()">Clear Fields</button>      
     </div>
   
   <div *ngIf="isUserAdmin" class="row">
@@ -96,9 +96,6 @@
       <td>{{ cust.region.name }}</td>
       <td>{{ cust.lastPurchase | DateTimeFormatPipe }}</td>
       <td *ngIf="isUserAdmin">{{ cust.user.login }}</td>
-    </tr>
+    </tr> 
   </tbody>
 </table>
-<div class="button-group col-xs-8 col-sm-8 col-md-2" style="float:right;">
-  <button class="btn btn-danger btn-block" (click)="logout()">Logout</button>
-</div>

@@ -183,11 +183,5 @@ export class CustomersComponent implements OnInit {
   clearFormFields() {
     this.filteredRegions = this.regions;
     this.filterForm.reset();
-  }
-
-  logout() {
-    localStorage.removeItem('login');
-    this.toastr.show('Log Out');
-    this.router.navigate(['/login']);
-  }
+  }  
 }

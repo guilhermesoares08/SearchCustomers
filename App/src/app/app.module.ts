@@ -15,13 +15,15 @@ import {AuthGuard} from './auth/auth.guard'
 import { RouterModule } from '@angular/router';
 import { AuthenticationService } from './services/Authentication.service';
 import { DateTimeFormatPipePipe } from './_helpers/DateTimeFormatPipe.pipe';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomersComponent,
     LoginComponent,
-    DateTimeFormatPipePipe
+    DateTimeFormatPipePipe,
+    NavComponent
   ],
   imports: [
     BrowserModule,
