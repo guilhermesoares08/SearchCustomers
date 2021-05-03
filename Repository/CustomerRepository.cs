@@ -154,5 +154,13 @@ namespace Repository
             query = query.AsNoTracking().Where(c => c.Id == id);            
             return query.FirstOrDefault();
         }
+
+        public City GetCityById(int id)
+        {
+            IQueryable<City> query = _customerContext.Cities;
+            query = query.Include(q => q.Region);
+            query = query.AsNoTracking().Where(c => c.Id == id);
+            return query.FirstOrDefault();
+        }        
     }
 }

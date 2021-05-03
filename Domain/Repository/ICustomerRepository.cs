@@ -14,8 +14,6 @@ namespace Domain.Repository
         List<UserSys> GetAllUsersSys();
         List<Region> GetAllRegions();
         UserRole GetUserRoleById(int id);
-
-
-
+        City GetCityById(int id);
     }
 }

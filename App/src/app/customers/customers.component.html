@@ -18,7 +18,7 @@
   <div class="row">
     <div class="form-group col-md-4">
       <label>City:</label>
-      <select class="form-control" id="cityId" formControlName="cityId" >
+      <select (change)='onCitySelected()' class="form-control" id="cityId" formControlName="cityId" >
         <option   role="menuitem" *ngFor="let t of cities" [ngValue]="t.id">
           <a class="dropdown-item">{{ t.name }}</a>
         </option>
@@ -40,7 +40,7 @@
       <button class="btn btn-outline-success btn-block" (click)="filterForm.reset()">Clear Fields</button>
     </div>
   
-  <div class="row">
+  <div *ngIf="isUserAdmin" class="row">
     <div class="form-group col-md-4">
       <label>Last Purchase:</label>      
       <input formControlName="stDate" type="text" placeholder="" class="form-control" bsDatepicker>     
@@ -51,7 +51,7 @@
       </div>    
   </div>
  
-  <div class="row">
+  <div *ngIf="isUserAdmin" class="row">
     <div class="form-group col-md-4">
       <label>Classification:</label>
       <select class="form-control" formControlName="classificationId">
@@ -82,8 +82,8 @@
       <th>Gender</th>
       <th>City</th>
       <th>Region</th>
-      <th>Last Purchase</th>
-      <th>Seller</th>
+      <th >Last Purchase</th>
+      <th *ngIf="isUserAdmin" >Seller</th>
     </tr>
   </thead>
   <tbody *ngIf="filteredCustomers && filteredCustomers.length">
@@ -95,7 +95,7 @@
       <td>{{ cust.city.name }}</td>
       <td>{{ cust.region.name }}</td>
       <td>{{ cust.lastPurchase }}</td>
-      <td>{{ cust.user.login }}</td>
+      <td *ngIf="isUserAdmin">{{ cust.user.login }}</td>
     </tr>
   </tbody>
 </table>

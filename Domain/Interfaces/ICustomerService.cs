@@ -14,5 +14,6 @@ namespace Domain.Interfaces
         List<UserSys> GetAllSellers();
         List<Region> GetAllRegions();
         UserRole GetUserRoleById(int id);
+        City GetCityById(int id);
     }
 }

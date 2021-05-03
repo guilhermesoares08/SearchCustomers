@@ -156,5 +156,21 @@ namespace WebAPI.Controllers
                 return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database has failed {ex.Message}");
             }
         }
+
+        [HttpGet("cities/{id}")]
+        [AllowAnonymous]
+        public IActionResult GetCityById(int id)
+        {
+            try
+            {
+                City results = _service.GetCityById(id);
+                CityDto resultMap = _mapper.Map<CityDto>(results);
+                return Ok(resultMap);
+            }
+            catch (System.Exception ex)
+            {
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database has failed {ex.Message}");
+            }
+        }
     }
 }

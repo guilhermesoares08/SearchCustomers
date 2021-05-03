@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { UserSys } from '../_models/UserSys';
-import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -31,7 +30,7 @@ export class AuthenticationService {
     return user != null;
   } 
 
-  getUserByLogin(login: string): Observable<UserSys> {
+  getUserByLogin(login: string) {
     return this.http.get<UserSys>(`${this.baseUrl}/UserByLogin/${login}`);
   }
 

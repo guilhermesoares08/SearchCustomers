@@ -11,6 +11,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Filter } from '../_models/Filter';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 import { AuthenticationService } from 'src/app/services/Authentication.service';
+import { toArray } from 'rxjs/operators';
 
 @Component({
   selector: 'app-customers',
@@ -20,6 +21,7 @@ import { AuthenticationService } from 'src/app/services/Authentication.service';
 export class CustomersComponent implements OnInit {
 
   currentUser: UserSys;
+  isUserAdmin: boolean;
   customers: Customer[];
   cities: City[];
   classifications: Classification[];
@@ -32,18 +34,25 @@ export class CustomersComponent implements OnInit {
   filteredCustomers: Customer[];
   filter: Filter;
   datepickerConfig: Partial<BsDatepickerConfig>;
+  filteredCity: City;
+
   constructor(private http: HttpClient, private customerService: CustomerService, private formBuilder: FormBuilder, private authService: AuthenticationService) {
+
     this.datepickerConfig = Object.assign({}, { dateInputFormat: 'DD/MM/YYYY' });
 
   }
 
   ngOnInit() {
-    this.getAllCustomers();
-    this.getAllCities();
-    this.getAllRegions();
-    this.getAllSellers();
-    this.getAllClassification();
-    this.getAllGenders();
+    if (this.authService.loggedIn()) {
+      this.isUserAdmin = this.currentUserIsAdmin();
+      this.getCurrentUser();
+      this.getAllCustomers();
+      this.getAllCities();
+      this.getAllRegions();
+      this.getAllSellers();
+      this.getAllClassification();
+      this.getAllGenders();
+    }
 
     this.filterForm = new FormGroup({
       cityId: new FormControl(null),
@@ -55,6 +64,7 @@ export class CustomersComponent implements OnInit {
       genderId: new FormControl(null),
       searchText: new FormControl(null)
     });
+
   }
 
   getAllCustomers() {
@@ -134,5 +144,32 @@ export class CustomersComponent implements OnInit {
         }
       );
     }
+  }
+  onCitySelected() {
+    this.customerService.getCityById(this.filterForm.value.cityId).subscribe(
+      (_city: City) => {
+        this.filteredCity = _city;
+        this.regions = [];
+        this.regions.push(_city.region);
+      }
+    );
+  }
+
+  getCurrentUser() {
+    this.authService.getUserByLogin(sessionStorage.getItem('login')).subscribe(
+      (_user: UserSys) => {
+        this.currentUser = _user;
+      }
+    );
+  }
+
+  currentUserIsAdmin() {
+    this.authService.getUserByLogin(sessionStorage.getItem('login')).subscribe(
+      (_user: UserSys) => {
+        this.currentUser = _user;
+        return _user.userRole.isAdmin;
+      }
+    );
+    return false;
   }
 }

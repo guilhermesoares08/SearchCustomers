@@ -63,5 +63,10 @@ namespace Domain.Services
         {
             return _repo.GetUserRoleById(id);
         }
+
+        public City GetCityById(int id)
+        {
+            return _repo.GetCityById(id);
+        }
     }
 }
