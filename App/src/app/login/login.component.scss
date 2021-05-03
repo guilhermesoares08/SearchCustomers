@@ -4,3 +4,8 @@
     padding: 15px;
     margin: 15% auto;
 }
+
+form.submitted .ng-invalid
+{
+    border:1px solid #f00;
+}

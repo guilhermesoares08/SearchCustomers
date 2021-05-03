@@ -29,7 +29,7 @@ namespace Repository
                     return objRet;
                 }
             }
-            return query.FirstOrDefault();
+            return null;
         }
 
         public UserSys GetUserByLogin(string login)

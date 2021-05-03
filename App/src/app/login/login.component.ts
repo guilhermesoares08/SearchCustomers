@@ -13,15 +13,16 @@ import { UserSys } from '../_models/UserSys';
 export class LoginComponent implements OnInit {
 
   title = 'Login';
-  model: UserSys;
+  model: UserSys = { id: null, password: '', email: '', login: '', userRole: null };
 
   constructor(private authService: AuthenticationService
     ,         public router: Router
     ,         private toastr: ToastrService) {
-      this.model = new UserSys();
+      
+      
      }
 
-  ngOnInit() {
+  ngOnInit() {   
     
     if (sessionStorage.getItem('login') != null) {
       this.router.navigate(['']);
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {    
+    
     var tmpModel = Object.assign({}, this.model);
     tmpModel.password = this.encrypt(this.model.password);
     this.authService.login(tmpModel)
