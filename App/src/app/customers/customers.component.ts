@@ -1,19 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import { Customer } from '../_models/Customer';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from 'src/app/services/Authentication.service';
 import { CustomerService } from '../services/CustomerService.service';
+import { City } from '../_models/City';
 import { Classification } from '../_models/Classification';
+import { Customer } from '../_models/Customer';
+import { Filter } from '../_models/Filter';
 import { Gender } from '../_models/Gender';
 import { Region } from '../_models/Region';
-import { City } from '../_models/City';
 import { UserSys } from '../_models/UserSys';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Filter } from '../_models/Filter';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { AuthenticationService } from 'src/app/services/Authentication.service';
-import { toArray } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-customers',

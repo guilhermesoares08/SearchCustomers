@@ -11,8 +11,8 @@ import { AuthenticationService } from '../services/Authentication.service';
 export class NavComponent implements OnInit {
 
   constructor(public authService: AuthenticationService
-    ,         public router: Router
-    ,         private toastr: ToastrService) { }
+    , public router: Router
+    , private toastr: ToastrService) { }
 
   ngOnInit() {
   }
