@@ -5,7 +5,7 @@
     margin: 15% auto;
 }
 
-form.submitted .ng-invalid
+form.signin .ng-invalid
 {
-    border:1px solid #f00;
+    border-color:red;
 }

@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   title = 'Login';
   model: UserSys = { id: null, password: '', email: '', login: '', userRole: null };
+  validUser: boolean;
 
   constructor(private authService: AuthenticationService
     ,         public router: Router
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
      }
 
   ngOnInit() {   
-    
+    this.validUser = false;
     if (sessionStorage.getItem('login') != null) {
       this.router.navigate(['']);
     }
@@ -36,11 +37,13 @@ export class LoginComponent implements OnInit {
     this.authService.login(tmpModel)
       .subscribe(
         (_return: any) => {          
+          this.validUser = true;
           sessionStorage.setItem('login', _return.user.login);
           this.router.navigate(['']);
           this.toastr.success('Login Succefull');
         },
         error => {
+          this.validUser = false;
           this.toastr.error('The email and/or password entered is invalid. Please try again.');
         }
       );

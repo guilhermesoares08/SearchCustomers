@@ -12,16 +12,6 @@ export class AuthenticationService {
   constructor(private http: HttpClient) { }
 
   login(model: UserSys) {
-    
-    // return this.http.post(`${this.baseUrl}/login`, model).pipe(
-    //     map((response: any) => {
-    //       const user = response;
-    //       if (user) {
-    //         sessionStorage.setItem('login', user.login);
-    //       }
-    //     })
-    //   );
-
     return this.http.post(`${this.baseUrl}/login`, model);
   }
 

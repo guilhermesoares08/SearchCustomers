@@ -5,10 +5,10 @@
   <form  class="form-signin" #loginForm="ngForm" (ngSubmit)="login()">
     <div id="formContent">
       <input type="email" id="username" class="form-control"
-      name="email" required [(ngModel)]="model.email" placeholder="Email" required>        
+      name="email" [(ngModel)]="model.email" placeholder="Email" [ngClass]="{'ng-invalid':!validUser}" >        
       <input type="password" id="password" class="form-control" 
-      name="password" required [(ngModel)]="model.password" placeholder="Password" [ngClass]="{'border-color: red': !loginForm.valid}">    
-      <button   class="btn btn-lg btn-primary btn-block" type="submit" [ngClass]="{'border-color: red': !loginForm.valid}" >Login</button>  
+      name="password" [(ngModel)]="model.password" placeholder="Password" [ngClass]="{'ng-invalid':!validUser}">      
+      <button   class="btn btn-lg btn-primary btn-block" type="submit" >Login</button>  
       
     </div>  
   </form>  
