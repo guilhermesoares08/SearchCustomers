@@ -23,7 +23,6 @@ export class CustomersComponent implements OnInit {
 
   currentUser: UserSys;
   isUserAdmin: boolean;
-  customers: Customer[];
   cities: City[];
   classifications: Classification[];
   genders: Gender[];
@@ -35,14 +34,13 @@ export class CustomersComponent implements OnInit {
   endDate: Date;
   filteredCustomers: Customer[];
   filter: Filter;
-  datepickerConfig: Partial<BsDatepickerConfig>;
   filteredCity: City;
 
-
-
-  constructor(private http: HttpClient, private customerService: CustomerService, private formBuilder: FormBuilder, private authService: AuthenticationService, private toastr: ToastrService, public router: Router) {
-
-    this.datepickerConfig = Object.assign({}, { dateInputFormat: 'DD/MM/YYYY' });
+  constructor(private http: HttpClient,
+    private customerService: CustomerService,
+    private formBuilder: FormBuilder,
+    private authService: AuthenticationService,
+    private toastr: ToastrService, public router: Router) {
 
   }
 
@@ -68,7 +66,6 @@ export class CustomersComponent implements OnInit {
       genderId: new FormControl(null),
       searchText: new FormControl(null)
     });
-
   }
 
   getAllCustomers() {
@@ -79,15 +76,13 @@ export class CustomersComponent implements OnInit {
           if (this.currentUser != null) {
             this.customerService.getCustomerByUser(this.currentUser.id).subscribe(
               (_customers: Customer[]) => {
-                this.customers = _customers;
-                this.filteredCustomers = this.customers;
+                this.filteredCustomers = _customers;
               }
             );
           }
         }
       );
     }
-
   }
 
   getAllCities() {
@@ -182,5 +177,5 @@ export class CustomersComponent implements OnInit {
   clearFormFields() {
     this.filteredRegions = this.regions;
     this.filterForm.reset();
-  }  
+  }
 }

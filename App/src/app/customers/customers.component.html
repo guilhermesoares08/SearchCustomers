@@ -26,7 +26,7 @@
     </div>
       <div class="form-group col-md-4">
         <label>Region:</label>
-        <select  class="form-control" formControlName="regionId">          
+        <select class="form-control" formControlName="regionId">          
           <option  role="menuitem" *ngFor="let t of filteredRegions" [ngValue]="t.id">
             <a class="dropdown-item">{{ t.name }}</a>
           </option>
