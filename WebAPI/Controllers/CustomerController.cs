@@ -35,7 +35,7 @@ namespace WebAPI.Controllers
             }
             catch (System.Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database has failed {ex.Message}");
             }
         }
 
@@ -53,7 +53,7 @@ namespace WebAPI.Controllers
             }
             catch (System.Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database has failed {ex.Message}");
             }
         }
 
@@ -73,7 +73,7 @@ namespace WebAPI.Controllers
             {
                 string innerEx = ex.InnerException.Message;
                 string exMessage = ex.Message;
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou{exMessage + "|" + innerEx}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database has failed{exMessage + "|" + innerEx}");
             }
         }
 
@@ -89,7 +89,7 @@ namespace WebAPI.Controllers
             }
             catch (System.Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database has failed {ex.Message}");
             }
         }
 
@@ -105,7 +105,7 @@ namespace WebAPI.Controllers
             }
             catch (System.Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database has failed {ex.Message}");
             }
         }
 
@@ -121,7 +121,7 @@ namespace WebAPI.Controllers
             }
             catch (System.Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database has failed {ex.Message}");
             }
         }
 
@@ -137,7 +137,7 @@ namespace WebAPI.Controllers
             }
             catch (System.Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database has failed {ex.Message}");
             }
         }
 
@@ -153,7 +153,7 @@ namespace WebAPI.Controllers
             }
             catch (System.Exception ex)
             {
-                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Banco Dados Falhou {ex.Message}");
+                return this.StatusCode(StatusCodes.Status500InternalServerError, $"Database has failed {ex.Message}");
             }
         }
     }

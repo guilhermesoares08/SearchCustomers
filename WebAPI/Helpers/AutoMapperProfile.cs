@@ -16,6 +16,7 @@ namespace WebAPI.Helpers
             CreateMap<UserRole, UserRoleDto>().ReverseMap();
             CreateMap<UserSys, UserSysDto>().ReverseMap();
             CreateMap<Filter, FilterDto>().ReverseMap();
+            CreateMap<UserSys, UserLoginDto>().ReverseMap();
         }
     }
 }

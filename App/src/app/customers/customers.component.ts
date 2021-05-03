@@ -123,4 +123,10 @@ export class CustomersComponent implements OnInit {
     );
   }
 
+  // logout() {
+  //   localStorage.removeItem('token');
+  //   this.toastr.show('Log Out');
+  //   this.router.navigate(['/user/login']);
+  // }
+
 }

@@ -13,7 +13,7 @@ namespace Domain.Services
             _repo = repo;
         }     
         
-        public bool ValidateUser(string email, string password)
+        public UserSys ValidateUser(string email, string password)
         {
             return _repo.ValidateUser(email, password);
         }

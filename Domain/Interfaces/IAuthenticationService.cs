@@ -2,6 +2,6 @@ namespace Domain.Interfaces
 {
     public interface IAuthenticationService
     {
-        bool ValidateUser(string email, string password);
+        UserSys ValidateUser(string email, string password);
     }
 }

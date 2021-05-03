@@ -14,16 +14,11 @@ namespace Repository
         {
             _customerContext = customerContext;
         }
-        public bool ValidateUser(string email, string password)
-        {
-            bool isValid = false;
+        public UserSys ValidateUser(string email, string password)
+        {            
             IQueryable<UserSys> query = _customerContext.UserSys;
             query = query.AsNoTracking().Where(t => t.Email.ToUpper().Equals(email.ToUpper()) && t.Password.Equals(password));
-            if(query.First() != null)
-            {
-                isValid = true;
-            }
-            return isValid;
+            return query.FirstOrDefault();
         }
     }
 }

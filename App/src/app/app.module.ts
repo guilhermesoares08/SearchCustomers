@@ -6,18 +6,21 @@ import { AppComponent } from './app.component';
 import { CustomersComponent } from './customers/customers.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CustomerService } from './services/CustomerService.service';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import { ToastrModule } from 'ngx-toastr';
+import {AuthGuard} from './auth/auth.guard'
+import { RouterModule } from '@angular/router';
+import { AuthenticationService } from './services/Authentication.service';
 
 @NgModule({
-  declarations: [		
-    AppComponent,      
-      CustomersComponent
-   ],
+  declarations: [
+    AppComponent,
+    CustomersComponent,
+    LoginComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -26,10 +29,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    })    
   ],
   providers: [
-    
+    AuthGuard, AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

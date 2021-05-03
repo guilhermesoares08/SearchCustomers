@@ -2,6 +2,6 @@ namespace Domain.Repository
 {
     public interface IAuthenticationRepository
     {
-        bool ValidateUser(string email, string password);
+        UserSys ValidateUser(string email, string password);
     }
 }
