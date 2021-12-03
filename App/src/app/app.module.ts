@@ -11,11 +11,12 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import {AuthGuard} from './auth/auth.guard'
+import {AuthGuard} from './auth/auth.guard';
 import { RouterModule } from '@angular/router';
 import { AuthenticationService } from './services/Authentication.service';
 import { DateTimeFormatPipePipe } from './_helpers/DateTimeFormatPipe.pipe';
 import { NavComponent } from './nav/nav.component';
+import { NewCustomersComponent } from './newCustomers/newCustomers.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +24,9 @@ import { NavComponent } from './nav/nav.component';
     CustomersComponent,
     LoginComponent,
     DateTimeFormatPipePipe,
-    NavComponent
-  ],
+    NavComponent,
+    NewCustomersComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -38,7 +40,7 @@ import { NavComponent } from './nav/nav.component';
       timeOut: 10000,
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
-    })    
+    })
   ],
   providers: [
     AuthGuard, AuthenticationService

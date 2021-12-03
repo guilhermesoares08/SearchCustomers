@@ -6,7 +6,7 @@ import { UserSys } from '../_models/UserSys';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  baseUrl = environment.apiEndpoint + `/authentication`;  
+  baseUrl = environment.apiEndpoint + `/authentication`;
 
   constructor(private http: HttpClient) { }
 
@@ -15,9 +15,9 @@ export class AuthenticationService {
   }
 
   loggedIn() {
-    var user = localStorage.getItem('login');
+    let user = localStorage.getItem('login');
     return user != null;
-  } 
+  }
 
   getUserByLogin(login: string) {
     return this.http.get<UserSys>(`${this.baseUrl}/UserByLogin/${login}`);

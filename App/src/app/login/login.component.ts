@@ -19,24 +19,24 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthenticationService
     ,         public router: Router
     ,         private toastr: ToastrService) {
-      
-      
+
+
      }
 
-  ngOnInit() {   
+  ngOnInit() {
     this.validUser = true;
     if (localStorage.getItem('login') != null) {
       this.router.navigate(['']);
     }
   }
 
-  login() {    
-    
-    var tmpModel = Object.assign({}, this.model);
+  login() {
+
+    let tmpModel = Object.assign({}, this.model);
     tmpModel.password = this.encrypt(this.model.password);
     this.authService.login(tmpModel)
       .subscribe(
-        (_return: any) => {          
+        (_return: any) => {
           this.validUser = true;
           localStorage.setItem('login', _return.user.login);
           this.router.navigate(['']);
@@ -49,9 +49,9 @@ export class LoginComponent implements OnInit {
       );
   }
 
-  encrypt(text: string){
+  encrypt(text: string) {
     const md5 = new Md5();
-    return md5.appendStr(text).end() as string;    
+    return md5.appendStr(text).end() as string;
   }
 
 }

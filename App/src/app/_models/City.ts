@@ -1,7 +1,7 @@
-import { Region } from "./Region";
+import { Region } from './Region';
 
 export class City {
-    id: number; 
-    name: string; 
-    region: Region; 
+    id: number;
+    name: string;
+    region: Region;
 }

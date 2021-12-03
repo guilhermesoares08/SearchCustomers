@@ -30,7 +30,7 @@ export class CustomerService {
     return this.http.post(`${this.baseUrl}/filter`, filter);
   }
 
-  getAllCities(){
+  getAllCities() {
     return this.http.get<City[]>(this.baseUrl + `/cities`);
   }
 
@@ -38,7 +38,7 @@ export class CustomerService {
     return this.http.get<Region[]>(this.baseUrl + `/regions`);
   }
 
-  getAllSellers(){
+  getAllSellers() {
     return this.http.get<UserSys[]>(this.baseUrl + `/sellers`);
   }
 

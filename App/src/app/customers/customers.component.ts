@@ -37,10 +37,10 @@ export class CustomersComponent implements OnInit {
   filteredCity: City;
 
   constructor(private http: HttpClient,
-    private customerService: CustomerService,
-    private formBuilder: FormBuilder,
-    private authService: AuthenticationService,
-    private toastr: ToastrService, public router: Router) {
+              private customerService: CustomerService,
+              private formBuilder: FormBuilder,
+              private authService: AuthenticationService,
+              private toastr: ToastrService, public router: Router) {
 
   }
 
@@ -121,7 +121,7 @@ export class CustomersComponent implements OnInit {
   getAllClassification() {
     this.customerService.getAllClassifications().subscribe(
       (_classifications: Classification[]) => {
-        this.classifications = _classifications
+        this.classifications = _classifications;
       }
     );
   }
@@ -129,14 +129,14 @@ export class CustomersComponent implements OnInit {
   searchCustomer() {
     if (this.authService.loggedIn()) {
       this.filter = new Filter();
-      this.filter.cityId = this.filterForm.controls['cityId'].value;
-      this.filter.classificationId = this.filterForm.controls['classificationId'].value;
-      this.filter.genderId = this.filterForm.controls['genderId'].value;
-      this.filter.name = this.filterForm.controls['searchText'].value;
-      this.filter.regionId = this.filterForm.controls['regionId'].value;
-      this.filter.sellerId = this.filterForm.controls['sellerId'].value;
-      this.filter.startDate = this.filterForm.controls['stDate'].value;
-      this.filter.endDate = this.filterForm.controls['edDate'].value;
+      this.filter.cityId = this.filterForm.controls.cityId.value;
+      this.filter.classificationId = this.filterForm.controls.classificationId.value;
+      this.filter.genderId = this.filterForm.controls.genderId.value;
+      this.filter.name = this.filterForm.controls.searchText.value;
+      this.filter.regionId = this.filterForm.controls.regionId.value;
+      this.filter.sellerId = this.filterForm.controls.sellerId.value;
+      this.filter.startDate = this.filterForm.controls.stDate.value;
+      this.filter.endDate = this.filterForm.controls.edDate.value;
       this.filter.userId = this.currentUser.id;
       this.customerService.getCustomerByFilter(this.filter).subscribe(
         (responseCustomers: Customer[]) => {

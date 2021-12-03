@@ -1,4 +1,4 @@
-export class Classification {  
-    id: number; 
-    name: string; 
+export class Classification {
+    id: number;
+    name: string;
 }
